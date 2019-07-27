@@ -1,0 +1,18 @@
+extends index.pug
+block content
+    main
+        .form-group
+            .shadow-sm.mt-2.mb-2.container
+                h3.text-center Login
+                form(action="" method="post" id="login-form")
+                    label(for='email') Email:
+                    input(type='email' class="form-control" name='email' id='email' required value=(email === undefined ? '' : email))
+
+                    label(for='password') Password:
+                    input(type='password' class="form-control" name='password' id='password' required)
+
+                    input(type='submit' class="mt-2 mb-2 btn btn-primary" value='Submit' id='submit')
+                if errors
+                    ul
+                        each error in errors
+                            li.text-danger.mb-2= error.message

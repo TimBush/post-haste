@@ -1,0 +1,62 @@
+extends index.pug
+block content
+    .row
+        aside.col-sm-2.col-10.mt-2
+            h4 Filter
+            form(action='/listings/filter' method='get')
+                input(hidden readonly name="filterForm")
+                .form-group
+                    label(for='category' class="mr-2") Category:  
+                    select(name='category' class='form-control-sm')
+                        option(value="") --Select--
+                        each category in categoryData
+                            option(value=category) #{category}
+                    .form-row
+                        .col
+                            label(for="city") City:
+                            input(type="text" name="city" class="form-control" id="city" maxlength='15' value=(undefined === city ? '' : city))
+                        .col
+                            label(for="state") State:
+                            input(type="text" name="state" class="form-control" id="state" maxlength='15' value=(undefined === state ? '' : state))
+
+                label Zip Code:
+                .form-group
+                    input(type="text" class="form-control" name="zip" id='zip' maxlength='5' value=(zip === undefined ? '' : zip))
+                label Price:    
+                .form-group.form-row
+                    .col
+                        input(type="text" class="form-control" name="minPrice" placeholder="Min" id='minPrice' maxlength='7' value=(minPrice === undefined ? '' : minPrice))
+                    .col
+                        input(type="text" class="form-control" name="maxPrice" placeholder="Max" id='maxPrice' maxlength='7' value=(maxPrice === undefined ? '' : maxPrice))
+                button(type="submit" class="btn btn-primary btn-block btn-sm") Update Search
+
+        main.col-sm-10.col-10.mt-2
+            h3 All Listings
+            form(action='/listings/search' method="get")
+                input(hidden readonly name="searchForm")
+                .form-group.row
+                    .col-sm-8.input-group
+                        input(type="text" class='form-control' name='search' placeholder="Search" maxlength='50' value=(search === undefined ? '' : search))
+                        .input-group-append
+                            button(type="submit" class="btn btn-primary") Search
+            if errors
+                each error in errors
+                    p.text-danger= error.message
+
+            
+            if (!posts || posts.length === 0)
+                h4 Nothing matched your search
+            else
+                .card-columns
+                    each post in posts
+                        .card.shadow.mt-2
+                            a(href='/post/' + post._id)
+                                img(src=post.imgHtmlSrc class="card-img-top")
+                            .card-body
+                                a(href='/post/' + post._id)
+                                    h5.card-title= post.title
+                                    p.card-text $#{post.price}
+                                p.card-text #[span(class="badge badge-secondary") #{post.city}]
+                                    
+        
+                                        

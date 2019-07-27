@@ -1,0 +1,8 @@
+extends index.pug
+block content
+    main
+        h3 Are you sure you'd like to delete your #{post.title} listing?
+        button(type='button' class='btn btn-light yes' id=post._id onclick="deletePost()") Yes
+        a(href='/dashboard') #[button(type='button' class='btn btn-light') No] 
+        p Keep in mind, this action is permanent!
+        

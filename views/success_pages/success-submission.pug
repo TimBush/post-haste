@@ -1,0 +1,16 @@
+extends ../index.pug
+block content
+    main
+        if (typeOfChange.updated)
+            h2 Success!
+            h3 Your listing has been successfully updated.
+            if typeOfChange.postUrl
+                h4 To view your updated post, #[a(href=typeOfChange.postUrl) Click here!]
+        else if (typeOfChange.created)
+            h2 Success!
+            h3 Your listing has been successfully created.
+            if typeOfChange.postUrl
+                h4 To view your new post, #[a(href=typeOfChange.postUrl) Click here!]
+        else if (typeOfChange.deleted)
+            h2 Success!
+            h3 Your listing has been successfully deleted.

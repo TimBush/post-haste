@@ -1,0 +1,22 @@
+extends index.pug
+block content
+    main
+        if (errorStatus === 400)
+            h2 #{errorStatus} Error
+            h3 There was a problem with your request
+        else if (errorStatus === 500)
+            h2 #{errorStatus} Error
+            h3 There was a problem with the server
+        else if (errorStatus === 404)
+            h2 #{errorStatus} Error
+            h3 We couldn't find the web page you're looking for 
+        else if (errorStatus === 409)
+            h2 That user is already registered
+            h3 Please navigate to the login page
+        else if (errorStatus === 401)
+            if (!message401)
+                h2 You need to be logged in to access this page
+                h3 Please navigate to the #[a(href='/login') login page]
+            else
+                h2 #{errorStatus} Unauthorized
+                h3= message401

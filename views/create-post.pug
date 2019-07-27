@@ -1,0 +1,44 @@
+extends index.pug
+block content
+    main
+        .form-group
+            .shadow-sm.mt-2.mb-2.container
+                h3.text-center Create a listing
+                form(action="/post/create" method="post" enctype="multipart/form-data" id="create-post-form")
+                    label(for="title") Title:
+                    input(type="text" class="form-control" name="title" id="title" required value=(undefined === title ? '' : title))
+
+                    label(for="description") Description:
+                    textarea(name="description" class="form-control" rows="10" id="description" required) #{(undefined === description ? '' : description)}
+
+                    label(for="price") Price:
+                    input(type="text" name="price" class="form-control" id="price" required value=(undefined === price ? '' : price))
+            
+                    .form-row
+                        .col
+                            label(for="city") City:
+                            input(type="text" name="city" class="form-control" id="city" required value=(undefined === city ? '' : city))
+                        .col
+                            label(for="state") State:
+                            input(type="text" name="state" class="form-control" id="state" required value=(undefined === state ? '' : state))
+                        .col
+                            label(for="zip") Zip Code:
+                            input(type="text" name="zip" class="form-control" id="zip" required value=(undefined === zip ? '' : zip))
+
+                    .form-row.mt-2
+                        label(for='category' class="mr-2") Category:  
+                        select(name='category' class='form-control form-control-sm')
+                            option(value="") --Select--
+                            each category in categoryData
+                                option(value=category) #{category}
+
+                    .form-row.mt-2
+                        label(for="video" class="mr-2") Select a video to upload:
+                    .form-row-mt-2
+                        input(type="file" name="videoFile" class="form-control-file" id="video")
+
+                    input(type="submit" class="btn btn-primary mt-4 mb-3 btn-block" value="Submit" id="submit")
+                if errors
+                    ul
+                        each error in errors
+                            li.text-danger= error.message

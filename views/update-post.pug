@@ -1,0 +1,50 @@
+extends index.pug
+block content
+    main
+        h4 You are currently editing your #[strong #{title}] listing
+        .form-group
+            .shadow-sm.mt-2.mb-2.container
+                form(action="/post/update" method="post" enctype="multipart/form-data" id="update-post-form")
+                    label(for="title") Title:
+                    input(type="text" name="title" class="form-control" id="title" required value=(undefined === title ? '' : title))
+
+                    label(for="description") Description:
+                    textarea(name="description" class="form-control" id="description" rows="10" required) #{(undefined === description ? '' : description)}
+
+                    label(for="price") Price:
+                    input(type="text" name="price" class="form-control" id="price" required value=(undefined === price ? '' : price))
+
+                    .form-row
+                        .col
+                            label(for="city") City:
+                            input(type="text" name="city" class="form-control" id="city" required value=(undefined === city ? '' : city))
+                        .col
+                            label(for="state") State:
+                            input(type="text" name="state" class="form-control" id="state" required value=(undefined === state ? '' : state))
+                        .col
+                            label(for="zip") Zip Code:
+                            input(type="text" name="zip" class="form-control" id="zip" required value=(undefined === zip ? '' : zip))
+
+                    label(for='category') Category:  
+                    select(name='category' class="form-control form-control-sm" required)
+                        option(value='') --Select--
+                        each category in categoryData
+                            option(value=category) #{category}
+
+                    .custom-control.custom-switch.mt-2
+                        input(type="checkbox" id='viewFileUpload' class="custom-control-input" onchange='showFile()')
+                        label(for='viewFileUpload' class="custom-control-label") Upload a new video file for your listing?
+
+                    .form-row.mt-2
+                        label(for="video") Select a file to upload:
+                    .form-row
+                        input(type="file" name="videoFile" class="form-control-file" id="video" disabled)
+
+                    input(type="text" value=postId id='postId' name='postId' readonly hidden)
+
+                    input(type="submit" value="Update Listing" class="btn btn-block btn-primary mt-4" id="submit-update-post")
+                if errors
+                    ul
+                        each error in errors
+                            li= error.message
+        

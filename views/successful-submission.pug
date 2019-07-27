@@ -1,0 +1,7 @@
+extends index.pug
+block content
+    main
+        h2 Success!
+        h3= message
+        if postUrl
+            h4 To view your new post, #[a(href=postUrl) Click here!]

@@ -1,0 +1,27 @@
+extends index.pug
+block content
+    main
+        h3 Welcome #{user.username}
+        if (user.posts)
+            #posts-list
+                h4 Posts
+                table.table
+                    thead
+                        tr
+                            th Title
+                            th Price
+                            th Location
+                            th Posted
+                    tbody
+                        each post in user.posts
+                            tr
+                                td= post.title   
+                                td $#{post.price}
+                                td= post.city
+                                td= post.createdAt
+                                td #[a(href='/post/' + post._id) #[button(type="button" class="btn btn-light") View Post]]
+                                td #[a(href='/post/update/' + post._id) #[button(type="button" class="btn btn-light") Edit Post]]
+                                td #[a(href='/post/delete/' + post._id) #[button(type="button" class="btn btn-danger") Delete]]
+        else
+            h4 Posts
+            h3 You currently don't have anything listed - #[a(href='/post/create') Click here to create a post]

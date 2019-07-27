@@ -1,0 +1,21 @@
+extends index.pug
+block content
+    main
+        .form-group
+            .shadow-sm.mt-2.mb-2.container
+                h3.text-center Register
+                form(action="" method="post" id="register-form")
+                    label(for="username") Username:
+                    input(type="text" class="form-control" name="username" id="username" required value=(username === undefined ? '' : username))
+
+                    label(for='email') Email:
+                    input(type='email' class="form-control" name='email' id='email' required value=(email === undefined ? '' : email))
+
+                    label(for='password') Password:
+                    input(type='password' class="form-control" name='password' id='password' required)
+
+                    input(type='submit' class="mt-2 mb-2 btn btn-primary" value='Submit' id='submit')
+                if errors
+                    ul
+                        each error in errors
+                            li= error.message

@@ -1,0 +1,24 @@
+extends index.pug
+block content
+    .container.mt-2
+        .row
+            main.col
+                div
+                    | !{htmlForVideo}
+                .row
+                    .col-sm-9
+                        h3= title
+                        p= description
+                    .col-sm-3
+                        h5 Location Information
+                        ul.list-group
+                            li.list-group-item #[strong City:] #{city}
+                            li.list-group-item #[strong State:] #{state}
+                            li.list-group-item #[strong Zip Code:] #{zip}
+                        h5.mt-2 Additonal Information
+                        ul.list-group
+                            li.list-group-item #[strong Category:] #{category}
+                            li.list-group-item #[strong Posted On:] #{createdAt}
+                            if (updatedAt)
+                                li.list-group-item #[strong Last Updated On:] #{updatedAt}
+
