@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 mongoose
-  .connect("mongodb://localhost/diddly", { useNewUrlParser: true })
+  .connect(process.env.MONGO_CONNECTION, { useNewUrlParser: true })
   .then(() => {
     console.log("Succesfully Connected to DB");
   })

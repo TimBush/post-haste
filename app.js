@@ -27,7 +27,9 @@ app.use(
     cookie: {
       maxAge: 60 * 60 * 1000
     },
-    store: new MongoStore({ url: "mongodb://localhost/test-store" })
+    store: new MongoStore({
+      url: process.env.MONGO_CONNECTION
+    }) // TODO - update for production env
   })
 );
 app.use(sessionManager);
